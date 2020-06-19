@@ -20,7 +20,7 @@ deta_inf = 10;
 deta_0 = 0.01;
 dlambda = 0.01;
 da = 0.1;
-dtau_0
+dtau_0 = 1;
 
 if isnumeric(SR) &&  isnumeric(n) && isnumeric(K) && isnumeric(eta_inf)...
         && isnumeric(tau_0) && isnumeric(eta_0) && isnumeric(lambda) && isnumeric(a)
@@ -63,13 +63,15 @@ if isnumeric(SR) &&  isnumeric(n) && isnumeric(K) && isnumeric(eta_inf)...
         end
     elseif n~=0 && K~=0 && eta_inf~=0 && eta_0==0 && tau_0~=0 && lambda==0 && a==0
         eta = tau_0./SR+K.*SR.^(n-1)+eta_inf; %Herschell-Bulkley extended model
-        deta = 0; % 0 by default for now
+        deta = sqrt((dtau_0./SR).^2+(SR.^(n-1).*dK).^2+deta_inf^2+...
+            ((n-1)*K.*SR.^(n-1)+tau_0./SR.^2).*dSR+K.*SR^(n-1).*log(SR).*dn);
         if debug_mode
             fprintf('Herschell-Bulkley extended model is used\n');
         end
     elseif n~=0 && K~=0 && eta_inf==0 && eta_0==0 && tau_0~=0 && lambda==0 && a==0
         eta = tau_0./SR+K.*SR.^(n-1); %Herschell-Bulkley model
-        deta = 0; % 0 by default for now
+        deta = sqrt((dtau_0./SR).^2+(SR.^(n-1).*dK).^2+...
+            ((n-1)*K.*SR.^(n-1)+tau_0./SR.^2).*dSR+K.*SR^(n-1).*log(SR).*dn);
         if debug_mode
             fprintf('Herschell-Bulkley model is used\n');
         end
