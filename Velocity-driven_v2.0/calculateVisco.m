@@ -17,6 +17,9 @@ function [eta,deta] = calculateVisco(SR,n,K,eta_inf,eta_0,tau_0,lambda,a,debug_m
 dK = 10;
 dn = 0.01;
 deta_inf = 10;
+deta_0 = 0.01;
+dlambda = 0.01;
+da = 0.1;
 
 if isnumeric(SR) &&  isnumeric(n) && isnumeric(K) && isnumeric(eta_inf)...
         && isnumeric(tau_0) && isnumeric(eta_0) && isnumeric(lambda) && isnumeric(a)
@@ -43,11 +46,11 @@ if isnumeric(SR) &&  isnumeric(n) && isnumeric(K) && isnumeric(eta_inf)...
         eta = eta_inf+(eta_0-eta_inf).*(1+(lambda.*SR).^a).^((n-1)/a); %Carreau model
         ratio = 1+(lambda.*SR)^a;
         deta1 = ((1-ratio^((n-1)/a))*deta_inf)^2;
-        deta2 = (1)^2;
-        deta3 = (1)^2;
-        deta4 = (1)^2;
-        deta5 = (1)^2;
-        deta = sqrt(deta1+deta2+deta3+deta4+deta5);0; % 0 by default for now
+        deta2 = (ratio^((n-1)/a)*deta_0)^2;
+        deta3 = ((eta_0-eta_inf)*ratio^((n-1-a)/a)*(n-1).*(lambda.*SR)^(a-1).*SR*dlambda)^2;
+        deta4 = ((eta_0-eta_inf)*ratio^((n-1-a)/a)*(n-1).*(lambda.*SR)^(a-1)*lambda.*dSR)^2;
+        deta5 = ((eta_0-eta_inf)*(n-1)*ratio/a*((lambda.*SR)^a*(log(lambda.*SR))/(1+(lambda.*SR)^a)-log(ratio)/a))^2;
+        deta = sqrt(deta1+deta2+deta3+deta4+deta5);0; 
         if debug_mode
             fprintf('Carreau model is used\n');
         end
