@@ -80,11 +80,12 @@ else % File was opened
     dRi = zeros(size(v,2),size(D,2));
     dP = zeros(size(v,2),1);
     deta = zeros(size(v,2),size(D,2));
+    dSR= zeros(size(v,2),size(D,2));
     
     % Compute overall P for desired nozzle exit speed and retrieve viscosity/shear rate data
     % for each P/v
     for i=1:1:size(v,2)
-        [newP,newEta,newSR,newQ,newdEta,newdP,newdRi] = ...
+        [newP,newEta,newSR,newQ,newdEta,newdP,newdRi,newdSR] = ...
             generateP(rho, v(i), D, L, n, K, eta_0, eta_inf, tau_0, lambda, a, P_amb, debug_mode);
         if isnan(newP)
             error('Pressure could not be computed due to invalid Reynolds number');
@@ -96,6 +97,7 @@ else % File was opened
             dP(i) = newdP;
             dRi(i,:) = newdRi;
             deta(i,:) = newdEta;
+            dSR(i,:) = newdSR;
         end
     end
     
@@ -120,7 +122,7 @@ else % File was opened
     %Nozzle #1 is plotted here
     comparePlotPV(v,P,v,P_lit,[0 0],[0 0],dP,plot_mode);
     i = 1;
-    comparePlotVisco(SR(:,i),eta(:,i),SR_lit,eta_lit,[0 0],[0 0],deta(:,i),plot_mode,i);
+    comparePlotVisco(SR(:,i),eta(:,i),SR_lit,eta_lit,[0 0],[0 0],deta(:,i),dSR(:,i),plot_mode,i);
     
     % Bar plot per applied pressure/desired velocity combination for comparison between nozzle exit velocities
     % Velocity #1 is plotted here
