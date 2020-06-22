@@ -118,13 +118,12 @@ else % File was opened
     
     %Plot and compare with literature values to validate the model
     %Nozzle #1 is plotted here
-    comparePlotPV(v,P(:,1),v,P_lit,[0 0],[0 0],dP,plot_mode);
-    comparePlotVisco(SR(:,1),eta(:,1),SR_lit,eta_lit,[0 0],[0 0],deta(:,1),plot_mode);
+    comparePlotPV(v,P,v,P_lit,[0 0],[0 0],dP,plot_mode);
+    i = 1;
+    comparePlotVisco(SR(:,i),eta(:,i),SR_lit,eta_lit,[0 0],[0 0],deta(:,i),plot_mode,i);
     
     % Bar plot per applied pressure/desired velocity combination for comparison between nozzle exit velocities
     % Velocity #1 is plotted here
-%     for i=1:1:size(v,2)
     i = 1;
-        compareBarPlotV(v_all(i,:),v(i),i,Errv_real(i,:),v_theo(i,:),plot_mode);
-%     end
+    compareBarPlotV(v_all(i,:),v(i),Errv_real(i,:),v_theo(i,:),plot_mode,i);
 end
