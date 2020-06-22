@@ -3,4 +3,4 @@ Computation of the required pressure to apply for Direct-Ink-Writing of polymer 
 
 Authors:
    - David Brzeski
-   - Jean-François Chauvette
+   - Jean-FranÃ§ois Chauvette
