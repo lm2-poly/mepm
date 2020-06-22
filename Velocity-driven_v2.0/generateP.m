@@ -1,4 +1,4 @@
-function [P,eta,SR,Q,deta,dP,dRi] = generateP(rho, v, D, L, n, K, eta_0, eta_inf, tau_0, lambda, a, P_amb, debug_mode)
+function [P,eta,SR,Q,deta,dP,dRi,dSR] = generateP(rho, v, D, L, n, K, eta_0, eta_inf, tau_0, lambda, a, P_amb, debug_mode)
 
 %**************************************************************************
 % generateP.m
