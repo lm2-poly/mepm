@@ -1,4 +1,4 @@
-function [v_real, Q_real,dv_real,Q_theo,v_theo] = generateVreal(P, dP, Q, rho, v, D, L, n, K, eta_0, eta_inf, tau_0, lambda, a, P_amb, debug_mode)
+function [v_real, Q_real,dv_real,Q_theo] = generateVreal(P, dP, Q, rho, v, D, L, n, K, eta_0, eta_inf, tau_0, lambda, a, P_amb, debug_mode)
 
 %**************************************************************************
 % generateVreal.m

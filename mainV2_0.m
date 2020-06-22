@@ -75,7 +75,7 @@ else % File was opened
     SR = zeros(size(v,2),size(D,2));    % To plot the shear rate
     Q = zeros(size(v,2),size(D,2));     % To re-calculate the true velocities
     v_all = zeros(size(v,2),size(D,2)); % To bar plot the velocities comparison
-    v_theo = zeros(size(v,2),size(D,2)); % To bar plot the velocities comparison
+    %Q_theo = zeros(size(v,2),size(D,2)); % To bar plot the velocities comparison
     Errv_real = zeros(size(v,2),size(D,2)); % To bar plot the velocities comparison
     dRi = zeros(size(v,2),size(D,2));
     dP = zeros(size(v,2),1);
@@ -102,12 +102,12 @@ else % File was opened
     % Compute true velocity and flow for nozzle true applied pressure
     % for each P/v combination
     for i=1:1:size(v,2)
-        [v_real, Q_real, dv_real,v_long] = generateVreal(P(i), dP(i,:),...
+        [v_real, Q_real, dv_real,q_long] = generateVreal(P(i), dP(i,:),...
             Q(i,:), rho, v(i),D, L, n, K, eta_0, eta_inf, tau_0, lambda,...
             a, P_amb, debug_mode);
         v_all(i,:) = v_real;
         Errv_real(i,:) = dv_real;
-        v_theo(i,:) = v_long;
+        %Q_theo(i,:) = q_long;
     end
     
     %Graphs ------------------------------------
@@ -125,5 +125,5 @@ else % File was opened
     % Bar plot per applied pressure/desired velocity combination for comparison between nozzle exit velocities
     % Velocity #1 is plotted here
     i = 1;
-    compareBarPlotV(v_all(i,:),v(i),Errv_real(i,:),v_theo(i,:),plot_mode,i);
+    compareBarPlotV(v_all(i,:),v(i),Errv_real(i,:),plot_mode,i);
 end
