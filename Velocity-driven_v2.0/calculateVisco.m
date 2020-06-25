@@ -32,8 +32,8 @@ if isnumeric(SR) &&  isnumeric(n) && isnumeric(K) && isnumeric(eta_inf)...
             fprintf('Sisko model is used\n');
         end
     elseif n==1 && K==0 && eta_inf~=0 && eta_0==0 && tau_0==0 && lambda==0 && a==0
-        eta = eta_inf; %Newtonian model
-        deta = deta_inf;
+        eta = eta_inf.*ones(1,size(SR,2)); %Newtonian model
+        deta = deta_inf.*ones(1,size(SR,2));
         if debug_mode
             fprintf('Newtonian model is used\n');
         end
