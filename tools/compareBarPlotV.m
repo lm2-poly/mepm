@@ -51,7 +51,12 @@ if isnumeric(v_real) && isnumeric(v_desired)
         err.LineStyle = 'none';
         set(t_model,'Color',red)
     else
+        hold(myPlot,'on')
+        err = errorbar(myPlot,nozzleNumber,v_real,dv_real,dv_real);
         t_model = text(myPlot,nozzleNumber,v_real,string(round(v_real,2)),'VerticalAlignment','bottom','HorizontalAlignment','center','FontSize',12);
+        err.Color = [0 0 0];
+        err.LineStyle = 'none';
+        set(t_model,'Color',red)
     end
     
     % Appearance

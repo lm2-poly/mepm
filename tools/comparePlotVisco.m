@@ -48,6 +48,9 @@ if isnumeric(eta_model) && isnumeric(SR_model) && isnumeric(eta_literature) && i
     % Error bars for model
     if nargin == 10
         errorbar(SR_model,eta_model,deta,deta,dSR,dSR,'-o','LineWidth',1.0,'Color',red);
+    else        
+        hold(myPlot,'on')
+        errorbar(myPlot,SR_model,eta_model,deta,deta,dSR,dSR,'-o','LineWidth',1.0,'Color',red);
     end
      
     % Axit limit (if any)

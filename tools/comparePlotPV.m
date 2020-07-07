@@ -72,6 +72,9 @@ if isnumeric(P_model) && isnumeric(v_model) && isnumeric(P_literature) && isnume
     % Error bars for model
     if nargin == 8
         errorbar(v_model,P_model,dP,'-','LineWidth',1.0,'Color',red);
+    else    
+        hold(myPlot,'on')
+        errorbar(myPlot,v_model,P_model,dP,'-','LineWidth',1.0,'Color',red);    
     end
     
     % Axit limit (if any)
