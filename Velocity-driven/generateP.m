@@ -19,7 +19,6 @@ fprintf('Desired nozzle exit speed (mm/s) = %.2f\n\n',v);
 % Flows computation
 [Q,dQ] = calculateQ(D,v);
 Q_eq = sum(Q); % Calculation of the total equivalent flow rate
-dQ_eq = sqrt(sum(dQ.^2));
 if debug_mode
     fprintf('Total equivalent Q (mm³/s) = %.2f\n',Q_eq);
     fprintf('Volumetric flow rates (mm³/s):\n');
@@ -59,7 +58,7 @@ end
 if typeEcoul == 0 % Laminar flow    
     % Required pressure computation
     P = calculatePrequired(R_eq,Q_eq,P_amb);
-    dP = sqrt((R_eq_error*Q_eq)^2+(R_eq*dQ_eq)^2);
+    dP = sqrt((R_eq_error*Q_eq)^2+(R_eq*sum(dQ))^2);
     fprintf('<strong>Required pressure (Pa) = %.0f</strong>\n',P);    
 else % Transition flow, turbulent flow or negative Reynolds
     P = nan;
