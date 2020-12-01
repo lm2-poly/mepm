@@ -9,7 +9,7 @@ function [P,eta,SR,Q,deta,dP,dRi,dSR] = generateP(rho, v, D, L, n, K, eta_0, eta
 % exit velocity. It validates the Reynold numbers. Finally, it returns the
 % required Pressure along with Viscosities and Shear rates arrays for plots.
 % 
-% Author: Jean-François Chauvette
+% Author: Jean-FranÃ§ois Chauvette
 % Date: June 13, 2020
 %**************************************************************************
 
@@ -17,15 +17,16 @@ fprintf('-----------------------------------------------------------------------
 fprintf('Desired nozzle exit speed (mm/s) = %.2f\n\n',v);
 
 % Flows computation
-[Q,dQ,Q_eq] = calculateQ(D,v);
-dQ_eq = sqrt(sum(dQ.^2));
+[Q,dQ] = calculateQ(D,v);
+Q_eq = sum(Q); % Calculation of the total equivalent flow rate
+
 if debug_mode
-    fprintf('Total equivalent Q (mm³/s) = %.2f\n',Q_eq);
-    fprintf('Volumetric flow rates (mm³/s):\n');
+    fprintf('Total equivalent Q (mmÂ³/s) = %.2f\n',Q_eq);
+    fprintf('Volumetric flow rates (mmÂ³/s):\n');
     printTableInConsole(Q);
 end
 
-% Shear rate computation (réel)
+% Shear rate computation (rÃ©el)
 [SR,dSR] = calculateSR(Q,D,v);
 if debug_mode
     fprintf('Shear rates (1/s):\n');
@@ -52,14 +53,14 @@ if typeEcoul == 0 % Laminar flow
     [R_eq,Ri] = calculateReq(eta,L,D);
     [R_eq_error,dRi] = calculateReqError(R_eq,Ri,size(D,2),D,L,eta,deta); 
     if debug_mode
-        fprintf('Total equivalent R (Pa.s/mm³) = %.2f\n',R_eq);
-        fprintf('Individual flow resistances (Pa.s/mm³):\n');
+        fprintf('Total equivalent R (Pa.s/mmÂ³) = %.2f\n',R_eq);
+        fprintf('Individual flow resistances (Pa.s/mmÂ³):\n');
         printTableInConsole(Ri);
     end
 
     % Required pressure computation
     P = calculatePrequired(R_eq,Q_eq,P_amb);
-    dP = sqrt((R_eq_error*Q_eq)^2+(R_eq*dQ_eq)^2);
+    dP = sqrt((R_eq_error*Q_eq)^2+(R_eq*sum(dQ))^2);
     fprintf('<strong>Required pressure (Pa) = %.0f</strong>\n',P);    
 else % Transition flow, turbulent flow or negative Reynolds
     P = nan;
