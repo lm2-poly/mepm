@@ -1,4 +1,4 @@
-function [Q,dQ] = calculateQ(D,v)
+function [Q,dQ,Q_eq] = calculateQ(D,v)
 
 %**************************************************************************
 %calculateQ.m is the function used to obtain the volumetric flow rate thru
@@ -11,9 +11,10 @@ function [Q,dQ] = calculateQ(D,v)
 %**************************************************************************
 
     if isnumeric(D) && isnumeric(v)
-        area = pi().*0.25.*D(1,:).^2;
-        Q = area(1,:).*v;
-        dQ = pi*0.25.*D(1,:).*D(2,:).*v;
+        area = pi().*(D(1,:)./2).^2;
+        Q = area(1,:).*v; % Calculation of the individual flow rate
+        dQ = pi*0.5.*D(1,:).*D(2,:).*v;
+        Q_eq = sum(Q);% Calculation of the total equivalent flow rate
     end
 
 end

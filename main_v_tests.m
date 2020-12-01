@@ -50,9 +50,6 @@ else % File was opened
     
     fprintf('User selected %s\n', material);
     
-    % Ask if prediction is for multinozzle
-    multinozzle = validUserInput('Is this prediction for the multinozzle printhead (y/n)? ', 0, 'y','n');
-    
     % Script call for testing purposes (auto-completion of alpha, D, L,
     % P_amb and v values).
     validation_infos;
@@ -88,7 +85,8 @@ else % File was opened
     
     % Compute overall P for desired nozzle exit speed and retrieve viscosity/shear rate data
     % for each P/v
-    for i=1:1:size(v,2)
+    D_avg = [0.25*ones(1,size(D,2));0.01*ones(1,size(D,2))];
+    for i=1:1:size(v,1)
         [newP,newEta,newSR,newQ,newdEta,newdP,newdRi,newdSR] = ...
             generateP(rho, v(i), D_avg, L, n, K, eta_0, eta_inf, tau_0, lambda, a, P_amb, debug_mode);
         if isnan(newP)
@@ -107,7 +105,7 @@ else % File was opened
     
     % Compute true velocity and flow for nozzle true applied pressure
     % for each P/v combination
-    for i=1:1:size(v,2)
+    for i=1:1:size(v,1)
         [v_real, Q_real, dv_real,q_long] = generateVreal(P(i), dP(i,:),...
             Q(i,:), rho, v(i),D, L, n, K, eta_0, eta_inf, tau_0, lambda,...
             a, P_amb, debug_mode);
@@ -120,9 +118,9 @@ else % File was opened
     fprintf('\n-------------------- Filament diameter calculation --------------------------\n');
     v_travel = v;%./9;
     for j=1:1:size(v_travel,2)
+        fprintf('Filament diameters for v travel = %.2f mm/s \n',v_travel(j));
         D_fila = sqrt(4.*Q_all(j,:)./(pi*v_travel(j)));
-        %fprintf('Filament diameters for v travel = %.2f mm/s \n',v_travel(j));
-        %printTableInConsole(D_fila);
+        printTableInConsole(D_fila);
     end
     
     %Graphs ------------------------------------
@@ -132,19 +130,14 @@ else % File was opened
     plot_mode = 'default';
     
     %Plot and compare with literature values to validate the model
-    if strcmpi(multinozzle,'y')
-        P_empty = multinozzleEmptyPressure(v); % Gets the multinozzle empty (no material) pressure (kPa)
-        P_lit = P_lit - P_empty;
-        P_max_multinozzle = P + P_empty';
-    end
-    comparePlotPV(v,P,v,P_lit,[0 0],[0 0],dP,plot_mode);
-    
     %Nozzle #1 is plotted here
-    i = 1;
+    comparePlotPV(v',P,v',P_lit,[0 0],[0 0],dP,plot_mode);
+    %%
+    i = 5;
     comparePlotVisco(SR(:,i),eta(:,i),SR_lit,eta_lit,[0 0],[0 0],deta(:,i),dSR(:,i),plot_mode,i);
     
     % Bar plot per applied pressure/desired velocity combination for comparison between nozzle exit velocities
     % Velocity #1 is plotted here
-    i = 1;
+    i = 5;
     compareBarPlotV(v_all(i,:),v(i),Errv_real(i,:),plot_mode,i);
 end
