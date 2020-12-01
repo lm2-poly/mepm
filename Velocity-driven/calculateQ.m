@@ -13,7 +13,7 @@ function [Q,dQ] = calculateQ(D,v)
     if isnumeric(D) && isnumeric(v)
         area = pi().*0.25.*D(1,:).^2;
         Q = area(1,:).*v;
-        dQ = pi*0.25.*D(1,:).*D(2,:).*v;
+        dQ = pi*0.5.*D(1,:).*D(2,:).*v;
     end
 
 end
