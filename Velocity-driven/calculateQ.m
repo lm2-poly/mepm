@@ -1,4 +1,4 @@
-function [Q,dQ] = calculateQ(D,v)
+function [Q,dQ,Q_eq] = calculateQ(D,v)
 
 %**************************************************************************
 %calculateQ.m is the function used to obtain the volumetric flow rate thru
@@ -6,7 +6,7 @@ function [Q,dQ] = calculateQ(D,v)
 %**************************************************************************
 %The output is a flow rate array for each of the nozzles (Q). The inputs
 %are the nozzle diameter array (D), the desired speed for all nozzles(v).
-%Author: David Brzeski, Jean-François Chauvette 
+%Author: David Brzeski, Jean-FranÃ§ois Chauvette 
 %Date: June 13, 2020
 %**************************************************************************
 
