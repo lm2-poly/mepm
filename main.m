@@ -56,23 +56,7 @@ else % File was opened
     % Script call for testing purposes (auto-completion of alpha, D, L,
     % P_amb and v values).
     validation_infos;
-    
-    % Request the printing head informations
-    % %     D = validUserInput('Enter the nominal nozzle inner diameter (mm) : ',1);
-    %     D_real = validUserInput('Enter the array ([a,b,c,...]) of measured nozzle inner diameter (mm) : ',1);
-    % %     L = validUserInput('Enter the nominal nozzle length (mm) : ',1);
-    %     L_real = validUserInput('Enter the array ([a,b,c,...]) of measured nozzle length (mm) : ',1);
-    %     P_amb = validUserInput('Enter the ambiant pressure (Pa) : ',1);
-    
-    % Request a printing velocity
-    %     v = validUserInput('Enter an array of nominal desired extrusion velocity for the nozzles (mm/s) : ',1);
-    
-    % Preallocation
-    %     D = D_real;%D*ones(1,size(D_real,2)); % Vector of theoretical nozzle diameters for overall P computation
-    %     L = L_real;%L*ones(1,size(L_real,2)); % Vector of theoretical nozzle lengths for overall P computation
-%     P_lit = [600,900,1100,1300,1500,1950,2250,2500];  % Literature values to compare to
-%     SR_lit = [35,76,160,300,500,700,1100]; % Literature values to compare to
-%     eta_lit = [120,82,55,38,28,22,16]; % Literature values to compare to
+  
     P = zeros(size(v,2),1);             % To plot the pressures
     eta = zeros(size(v,2),size(D,2));   % To plot the viscosity
     SR = zeros(size(v,2),size(D,2));    % To plot the shear rate
@@ -132,11 +116,11 @@ else % File was opened
     plot_mode = 'default';
     
     %Plot and compare with literature values to validate the model
-    if strcmpi(multinozzle,'y')
-        P_empty = multinozzleEmptyPressure(v); % Gets the multinozzle empty (no material) pressure (kPa)
-        P_lit = P_lit - P_empty;
-        P_max_multinozzle = P + P_empty';
-    end
+%     if strcmpi(multinozzle,'y')
+%         P_empty = multinozzleEmptyPressure(v); % Gets the multinozzle empty (no material) pressure (kPa)
+%         P_lit = P_lit - P_empty;
+%         P_max_multinozzle = P + P_empty';
+%     end
     comparePlotPV(v,P,v,P_lit,[0 0],[0 0],dP,plot_mode);
     
     %Nozzle #1 is plotted here

@@ -17,4 +17,3 @@ T = table(values{:}, 'VariableNames',VarNames); % Constructing the table
 disp(T);  % Displaying the table
 
 end
-

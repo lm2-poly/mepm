@@ -14,13 +14,13 @@ function [eta,deta] = calculateVisco(SR,n,K,eta_inf,eta_0,tau_0,lambda,a,debug_m
 %for debugging purposes, the following errors are defined (later = Excel):
 %Note: delta eta not yet defined for Carreau, Bingham, & Herschell-Bulkley 
 %(extended)models
-dK = 10;
-dn = 0.01;
-deta_inf = 10;
-deta_0 = 0.01;
-dlambda = 0.01;
-da = 0.1;
-dtau_0 = 1;
+dK = 0.1;
+dn = 0.0001;
+deta_inf = 0;
+deta_0 = 0;
+dlambda = 0;
+da = 0;
+dtau_0 = 0;
 
 if isnumeric(SR) &&  isnumeric(n) && isnumeric(K) && isnumeric(eta_inf)...
         && isnumeric(tau_0) && isnumeric(eta_0) && isnumeric(lambda) && isnumeric(a)

@@ -18,7 +18,7 @@ fprintf('Desired nozzle exit speed (mm/s) = %.2f\n\n',v);
 
 % Flows computation
 [Q,dQ] = calculateQ(D,v);
-Q_eq = sum(Q); % Calculation of the total equivalent flow rate
+Q_eq = sum(Q,2); % Calculation of the total equivalent flow rate
 
 if debug_mode
     fprintf('Total equivalent Q (mm³/s) = %.2f\n',Q_eq);
@@ -26,8 +26,10 @@ if debug_mode
     printTableInConsole(Q);
 end
 
-% Shear rate computation (réel)
+% Shear rate computation
 [SR,dSR] = calculateSR(Q,D,v);
+rabi = (3+(1/n))/4;
+SR = SR.*rabi;
 if debug_mode
     fprintf('Shear rates (1/s):\n');
     printTableInConsole(SR);
@@ -51,6 +53,8 @@ if typeEcoul == 0 % Laminar flow
     
     % Equivalent flow resistance computation
     [R_eq,Ri] = calculateReq(eta,L,D);
+    R_eq = R_eq.*rabi;
+    Ri = Ri.*rabi;
     [R_eq_error,dRi] = calculateReqError(R_eq,Ri,size(D,2),D,L,eta,deta); 
     if debug_mode
         fprintf('Total equivalent R (Pa.s/mm³) = %.2f\n',R_eq);
