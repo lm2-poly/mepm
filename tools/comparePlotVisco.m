@@ -19,7 +19,7 @@ if isnumeric(eta_model) && isnumeric(SR_model) && isnumeric(eta_literature) && i
     blue = [0 0.4470 0.7410];
     red = [0.8500 0.3250 0.0980];
     if nargin == 10
-        figure(i+1);
+        figure(i+2);
     end
     
     % Plot and data labels

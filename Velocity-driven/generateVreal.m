@@ -2,7 +2,7 @@ function [v_real, Q_real,dv_real,Q_theo] = generateVreal(P, dP, Q, rho, v, D, L,
 
 %**************************************************************************
 % generateVreal.m
-% Last updated : 2020-06-13
+% Last updated : 2021-10-27
 %**************************************************************************
 %
 % 
@@ -19,13 +19,18 @@ eta_real = zeros(1,size(D,2)); % Array of true recalculated shear rates
 Q_theo = zeros(1,size(D,2)); % Array of theoretical recalculated flow rate
 dQ_crit = 10^-4;    % Convergence criterion for true flow rate recalculation
 
+rabi = (3+(1/n))/4; % Rabinowitch correction
+
 for i=1:size(D,2) % Iteration on all nozzle for a given P/v combination
-    if debug_mode
-        fprintf('<strong>Nozzle #%i -----------------------</strong>\n',i);
-    end
+    
     variation_Q = dQ_crit+1; % Initializing a first dummy delta Q just to enter the while loop
     nbIter = 0; % Number of iteration needed for convergence
     Q_guess = Q(i); % The initial Q guess = the previously desired Q for each nozzle (at desired input nozzle exit velocity)
+    
+    if debug_mode
+        fprintf('<strong>Nozzle #%i -----------------------</strong>\n',i);
+        fprintf('Starting Q_guess (mm³/s) = %.4f\n', Q_guess);
+    end
     
     while variation_Q >= dQ_crit % Keep recalculating Q until it converges
         nbIter = nbIter + 1;
@@ -35,8 +40,10 @@ for i=1:size(D,2) % Iteration on all nozzle for a given P/v combination
         
         % Intermediate calculations
         [SR_temp,~] = calculateSR(Q_guess,D(:,i),0); % Shear rate
+        SR_temp = SR_temp.*rabi;
         [eta_temp,deta_temp] = calculateVisco(SR_temp,n,K,eta_inf,eta_0,tau_0,lambda,a,debug_mode,0); % Viscosity
         [~,Ri] = calculateReq(eta_temp,L(:,i),D(:,i)); % Nozzle flow resistance
+        Ri = Ri.*rabi;
 %         [~,dRi] = calculateReqError(0,Ri,size(D,2),D(:,i),L(:,i),eta_temp,deta_temp);
         [~,dRi] = calculateReqError(0,Ri,1,D(:,i),L(:,i),eta_temp,deta_temp);
         Q_temp = (P-P_amb)/Ri; % Temporary Q for comparison with criterion
@@ -46,7 +53,7 @@ for i=1:size(D,2) % Iteration on all nozzle for a given P/v combination
         Q_guess = Q_temp; % New Q guess
         
         if debug_mode
-            fprintf('Q_temp_%i = %.4f\n',nbIter,Q_temp);
+            fprintf('Q_temp_%i (mm³/s) = %.4f\n',nbIter,Q_temp);
             fprintf('dQ_%i = %.8f\n',nbIter,variation_Q);
         end
     end

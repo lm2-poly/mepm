@@ -13,6 +13,18 @@ function [P,eta,SR,Q,deta,dP,dRi,dSR] = generateP(rho, v, D, L, n, K, eta_0, eta
 % Date: June 13, 2020
 %**************************************************************************
 
+if v == 0
+    P= 0;
+    eta = 0;
+    SR = 0;
+    Q = 0;
+    deta = 0;
+    dP = 0;
+    dRi = 0;
+    dSR = 0;
+    return
+end
+
 fprintf('------------------------------------------------------------------------------------------------\n')
 fprintf('Desired nozzle exit speed (mm/s) = %.2f\n\n',v);
 
@@ -30,6 +42,7 @@ end
 [SR,dSR] = calculateSR(Q,D,v);
 rabi = (3+(1/n))/4;
 SR = SR.*rabi;
+% dSR = dSR.*rabi;
 if debug_mode
     fprintf('Shear rates (1/s):\n');
     printTableInConsole(SR);

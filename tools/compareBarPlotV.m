@@ -19,7 +19,7 @@ if isnumeric(v_real) && isnumeric(v_desired)
     red = [0.8500 0.3250 0.0980];
     darkRed = [0.64 0.08 0.18];
     if nargin == 5
-        figure(i+2);
+        figure(i+3);
     end
         
     % Plot and data labels
@@ -44,19 +44,21 @@ if isnumeric(v_real) && isnumeric(v_desired)
         bar(myPlot,nozzleNumber,v_real,0.2,'b','LineWidth',1.2);%,'HandleVisibility','off');
     end
     
-    if nargin == 5
-        err = errorbar(nozzleNumber,v_real,dv_real,dv_real);
-        t_model = text(nozzleNumber,v_real,string(round(v_real,2)),'VerticalAlignment','bottom','HorizontalAlignment','center','FontSize',12);
-        err.Color = [0 0 0];
-        err.LineStyle = 'none';
-        set(t_model,'Color',red)
-    else
-        hold(myPlot,'on')
-        err = errorbar(myPlot,nozzleNumber,v_real,dv_real,dv_real);
-        t_model = text(myPlot,nozzleNumber,v_real,string(round(v_real,2)),'VerticalAlignment','bottom','HorizontalAlignment','center','FontSize',12);
-        err.Color = [0 0 0];
-        err.LineStyle = 'none';
-        set(t_model,'Color',red)
+    if dv_real ~= 0
+        if nargin == 5
+            err = errorbar(nozzleNumber,v_real,dv_real,dv_real);
+            t_model = text(nozzleNumber,v_real,string(round(v_real,2)),'VerticalAlignment','bottom','HorizontalAlignment','center','FontSize',12);
+            err.Color = [0 0 0];
+            err.LineStyle = 'none';
+            set(t_model,'Color',red)
+        else
+            hold(myPlot,'on')
+            err = errorbar(myPlot,nozzleNumber,v_real,dv_real,dv_real);
+            t_model = text(myPlot,nozzleNumber,v_real,string(round(v_real,2)),'VerticalAlignment','bottom','HorizontalAlignment','center','FontSize',12);
+            err.Color = [0 0 0];
+            err.LineStyle = 'none';
+            set(t_model,'Color',red)
+        end
     end
     
     % Appearance
