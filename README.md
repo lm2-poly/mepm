@@ -2,7 +2,8 @@
 
 Authors:
 * Jean-François Chauvette (main author) : chauvettejf@gmail.com
-* David Brzeski
+* David Brzeski (author)
+* Daniel Therriault (supervisor and permanent corresponding author) : daniel.therriault@polymtl.ca
 
 Please contact us if you want to contribute.
 
@@ -15,7 +16,7 @@ A model to predict the required pressure to apply for Direct-Ink-Writing of non-
 High-speed multinozzle additive manufacturing and extrusion modeling of large-scale microscaffold networks
 * https://www.sciencedirect.com/science/article/pii/S2214860421004541
 * Explanation of the microscaffold networks geometry and potential of multinozzle printheads.
-* Citation :
+* Citation (IEEE):
 >J.-F. Chauvette, D. Brzeski, I. L. Hia, R. D. Farahani, N. Piccirelli, and D. Therriault, “High-speed multinozzle additive manufacturing and extrusion modeling of large-scale microscaffold networks,” Additive Manufacturing, p. 102294, Sep. 2021, doi: 10.1016/j.addma.2021.102294.
 
 ## Future work
