@@ -6,7 +6,7 @@ Authors:
 
 Please contact us if you want to contribute.
 
-Please cite our work if you use it.
+Please cite our Paper if you use this code. Thank you.
 
 ## Context
 A model to predict the required pressure to apply for Direct-Ink-Writing of non-Newtonian polymer material through a single or multinozzle printing device following the input of a desired printing speed (i.e., linear extrusion velocity) of the material exiting the nozzle(s).
