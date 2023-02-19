@@ -11,9 +11,8 @@ A model to predict the required pressure to apply for Direct-Ink-Writing of non-
 
 ## Publication 
 High-speed multinozzle additive manufacturing and extrusion modeling of large-scale microscaffold networks
-
-https://www.sciencedirect.com/science/article/pii/S2214860421004541
-Explanation of the microscaffold networks geometry and potential of multinozzle printheads.
+* https://www.sciencedirect.com/science/article/pii/S2214860421004541
+* Explanation of the microscaffold networks geometry and potential of multinozzle printheads.
 
 ## Future work
 We are looking for someone to convert the code from Matlab to Python in order to combine the MEPM to the Multinozzle Toolpath Generator (MTG). Contact us if you are interested.
