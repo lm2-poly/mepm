@@ -1,8 +1,8 @@
 # Multinozzle Extrusion Prediction Model (MEPM)
 
 Authors:
-	- Jean-François Chauvette (main author) : chauvettejf@gmail.com
-	- David Brzeski
+* Jean-François Chauvette (main author) : chauvettejf@gmail.com
+* David Brzeski
 
 Please contact us if you want to contribute.
 
