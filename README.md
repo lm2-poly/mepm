@@ -6,6 +6,9 @@ Authors:
 
 Please contact us if you want to contribute.
 
+Please cite our work if you use it :
+J.-F. Chauvette, D. Brzeski, I. L. Hia, R. D. Farahani, N. Piccirelli, and D. Therriault, “High-speed multinozzle additive manufacturing and extrusion modeling of large-scale microscaffold networks,” Additive Manufacturing, p. 102294, Sep. 2021, doi: 10.1016/j.addma.2021.102294.
+
 ## Context
 A model to predict the required pressure to apply for Direct-Ink-Writing of non-Newtonian polymer material through a single or multinozzle printing device following the input of a desired printing speed (i.e., linear extrusion velocity) of the material exiting the nozzle(s).
 
