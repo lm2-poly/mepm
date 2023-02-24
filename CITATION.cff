@@ -1,0 +1,29 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: MEPM
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Jean-François
+    family-names: Chauvette
+    email: chauvettejf@gmail.com
+    affiliation: 'LM², Polytechnique Montreal'
+  - given-names: David
+    family-names: Brzeski
+    email: brzeski.david@yahoo.ca
+    affiliation: 'LM², Polytechnique Montreal'
+  - given-names: Daniel
+    family-names: Therriault
+    email: daniel.therriault@polymtl.ca
+    affiliation: 'LM², Polytechnique Montreal'
+repository-code: 'https://github.com/lm2-poly/mepm'
+abstract: >-
+  A model to predict the required pressure to apply for
+  Direct Ink Writing of non-Newtonian polymer material
+  through a single or multinozzle printing device following
+  the input of a desired printing speed (i.e., linear
+  extrusion velocity) of the material exiting the nozzle(s).
